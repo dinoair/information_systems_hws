@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+    ansible_host:
+        build:
+            context: ./
+            dockerfile: dockerfile_ansible
+        command: ansible-playbook playbook.yml --become --user=USER --become-user=root --become-method=sudo 
+        volumes:
+          - ./app:/app
+          - ./playbooks:/playbooks      
