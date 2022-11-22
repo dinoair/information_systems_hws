@@ -1,0 +1,16 @@
+---
+- hosts: 127.0.0.1
+#  become: yes
+  vars:
+    jar: 'java-1.0-SNAPSHOT.jar'
+  tasks:
+    - name: dir exists
+      file: path=/dir_with_res/ state=directory
+    - name: copy jar
+      copy:
+        src: './../java/target/{{ jar }}'
+        dest: '/dir_with_res/{{ jar }}'
+        mode: '0755'
+    - name: run jar
+      shell: java -jar /dir_with_res/{{ jar }} > /dir_with_res/result.txt
+    
